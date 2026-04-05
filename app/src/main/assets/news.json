@@ -1,0 +1,64 @@
+{
+  "articles": [
+    {
+      "title": "India's Space Mission Achieves Historic Lunar Milestone",
+      "description": "ISRO successfully lands its latest lunar probe near the south pole of the Moon, marking a significant achievement in India's growing space exploration program and opening new possibilities for future crewed missions.",
+      "url": "https://www.isro.gov.in/chandrayaan",
+      "urlToImage": "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=800&q=80"
+    },
+    {
+      "title": "Bengaluru Startup Raises $50M to Revolutionize Rural Healthcare",
+      "description": "A Bengaluru-based healthtech startup has secured $50 million in Series B funding to expand its AI-powered diagnostic platform across rural India, aiming to serve over 10 million patients in underserved regions by 2026.",
+      "url": "https://techcrunch.com/startups/india-healthtech",
+      "urlToImage": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80"
+    },
+    {
+      "title": "Android 16 Developer Preview Brings Major UI Overhaul",
+      "description": "Google has released the first developer preview of Android 16, featuring a redesigned Material You interface, improved adaptive layouts for foldables, and new Jetpack Compose APIs that simplify complex animations and transitions.",
+      "url": "https://developer.android.com/about/versions/16",
+      "urlToImage": "https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?w=800&q=80"
+    },
+    {
+      "title": "India GDP Growth Forecast Revised Upward to 7.2% for 2025",
+      "description": "The International Monetary Fund has revised India's GDP growth forecast upward to 7.2% for 2025, citing strong domestic consumption, robust manufacturing output, and continued growth in the digital economy sector.",
+      "url": "https://www.imf.org/en/Publications/WEO",
+      "urlToImage": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80"
+    },
+    {
+      "title": "Hyderabad Emerges as India's Top Destination for Global Tech Giants",
+      "description": "A new industry report ranks Hyderabad as the most preferred city for global tech companies setting up R&D and engineering centres in India, driven by skilled talent availability, infrastructure, and a business-friendly environment.",
+      "url": "https://www.nasscom.in/reports/hyderabad-tech-hub",
+      "urlToImage": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80"
+    },
+    {
+      "title": "Kotlin Multiplatform Goes Stable: What It Means for Android Devs",
+      "description": "JetBrains has announced the stable release of Kotlin Multiplatform, allowing developers to share business logic across Android, iOS, and web platforms. Android developers can now leverage their existing Kotlin skills to build cross-platform apps without sacrificing native performance.",
+      "url": "https://kotlinlang.org/docs/multiplatform.html",
+      "urlToImage": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80"
+    },
+    {
+      "title": "Climate Change: India's Renewable Energy Capacity Crosses 200 GW",
+      "description": "India has crossed the 200 GW milestone in installed renewable energy capacity, with solar and wind power leading the surge. The government aims to achieve 500 GW of non-fossil fuel capacity by 2030 as part of its net-zero commitment.",
+      "url": "https://mnre.gov.in/renewable-energy-milestone",
+      "urlToImage": "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80"
+    },
+    {
+      "title": "Jetpack Compose 2.0 Released with Performance Improvements",
+      "description": "Google has released Jetpack Compose 2.0, delivering up to 40% faster rendering on complex UI trees, new lazy layout APIs, built-in support for shared element transitions, and tighter integration with the Navigation component for modern Android apps.",
+      "url": "https://developer.android.com/jetpack/compose/releases",
+      "urlToImage": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80"
+    },
+    {
+      "title": "IPL 2025 Season Kicks Off with Record Viewership Numbers",
+      "description": "The Indian Premier League 2025 season has begun with record-breaking viewership, surpassing 500 million viewers in the opening week across television and digital platforms, making it the most-watched cricket event in history.",
+      "url": "https://www.iplt20.com/news/2025/season-opener",
+      "urlToImage": "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800&q=80"
+    },
+    {
+      "title": "AI-Powered Code Review Tools Transforming Software Development",
+      "description": "A new wave of AI-powered code review tools is helping development teams catch bugs 60% faster and reduce code review time by half. These tools integrate directly with GitHub, GitLab, and Bitbucket, providing context-aware suggestions and security vulnerability detection.",
+      "url": "https://github.blog/ai-code-review-tools-2025",
+      "urlToImage": "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&q=80"
+    }
+  ]
+}
