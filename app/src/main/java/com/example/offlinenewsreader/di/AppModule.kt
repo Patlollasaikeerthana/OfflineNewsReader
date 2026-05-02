@@ -5,9 +5,11 @@ import androidx.room.Room
 import com.example.offlinenewsreader.data.local.NewsDataBase
 import com.example.offlinenewsreader.data.remote.LocalMockInterceptor
 import com.example.offlinenewsreader.data.remote.NewsApi
+import com.example.offlinenewsreader.data.repository.NetworkObserver
 import com.example.offlinenewsreader.data.repository.NewsRepositoryImpl
 import com.example.offlinenewsreader.domain.repository.NewsRepository
 import com.example.offlinenewsreader.domain.usecase.GetNewsUseCase
+import com.example.offlinenewsreader.domain.usecase.GetPagedNewsUseCase
 import com.example.offlinenewsreader.domain.usecase.RefreshNewsUseCase
 import com.example.offlinenewsreader.domain.usecase.SearchNewsUseCase
 import com.example.offlinenewsreader.presentation.viewmodel.NewsViewModel
@@ -36,14 +38,17 @@ val appModule = module {
             get(),
             NewsDataBase::class.java,
             "news_db"
-        ).build()
+        ).fallbackToDestructiveMigration(false).build()
     }
     single { get<NewsDataBase>().newsDao() }
+    single{get<NewsDataBase>().remoteKeyDao()}
     single<NewsRepository> {
-        NewsRepositoryImpl(get(), get())
+        NewsRepositoryImpl(get(), get(),get(),get())
     }
+    single{NetworkObserver(get())}
     factory { GetNewsUseCase(get()) }
     factory { RefreshNewsUseCase(get()) }
     factory { SearchNewsUseCase(get()) }
-    viewModel{ NewsViewModel(get(), get(), get(), get()) }
+    factory{GetPagedNewsUseCase(get()}
+    viewModel{ NewsViewModel(get(), get(), get(), get(),get(),get()) }
 }
