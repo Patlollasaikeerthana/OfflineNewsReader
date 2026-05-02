@@ -1,6 +1,7 @@
 package com.example.offlinenewsreader.domain.repository
 
 import com.example.offlinenewsreader.domain.model.Article
+import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 
 interface NewsRepository {
