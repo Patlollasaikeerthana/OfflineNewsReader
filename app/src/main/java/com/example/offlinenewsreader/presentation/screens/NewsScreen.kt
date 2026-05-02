@@ -76,6 +76,8 @@ fun NewsScreen(
 ) {
     val state by viewModel.state.collectAsState()
     var query by remember { mutableStateOf("") }
+    val pagedArticles = viewModel.pagedArticles.collectAsLazyPagingItems()
+    val isSearching = query.isNotBlank()
 
     Column(
         modifier = Modifier
@@ -124,11 +126,7 @@ fun NewsScreen(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        SwipeRefresh(
-            state = rememberSwipeRefreshState(state.isLoading),
-            onRefresh = { viewModel.refreshNews() },
-            modifier = Modifier.fillMaxSize()
-        ) {
+        if (isSearching) {
             when {
                 state.isLoading && state.data.isEmpty() -> {
                     LazyColumn(
@@ -137,37 +135,6 @@ fun NewsScreen(
                     ) {
                         items(6) {
                             ShimmerArticleItem()
-                        }
-                    }
-                }
-
-                state.error != null && state.data.isEmpty() -> {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(16.dp),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Warning,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.error,
-                            modifier = Modifier.size(48.dp)
-                        )
-                        Spacer(modifier = Modifier.height(12.dp))
-                        Text(
-                            text = state.error ?: "Unknown error",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.error,
-                            textAlign = TextAlign.Center
-                        )
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Button(
-                            onClick = { viewModel.refreshNews() },
-                            shape = RoundedCornerShape(50)
-                        ) {
-                            Text("Retry")
                         }
                     }
                 }
@@ -188,11 +155,76 @@ fun NewsScreen(
                     }
                 }
             }
+        } else {
+            SwipeRefresh(
+                state = rememberSwipeRefreshState(
+                    pagedArticles.loadState.refresh is LoadState.Loading
+                ),
+                onRefresh = { pagedArticles.refresh() },
+                modifier = Modifier.fillMaxSize()
+            ) {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(bottom = 16.dp)
+                ) {
+                    // initial load shimmer
+                    if (pagedArticles.loadState.refresh is LoadState.Loading) {
+                        items(6) { ShimmerArticleItem() }
+                    }
+
+                    // articles
+                    items(
+                        count = pagedArticles.itemCount,
+                        key = pagedArticles.itemKey { it.url }
+                    ) { index ->
+                        val article = pagedArticles[index]
+                        if (article != null) {
+                            ArticleItem(
+                                article = article,
+                                onBookmarkClick = { viewModel.toggleBookMark(article.url) }
+                            )
+                        }
+                    }
+
+                    // append load indicator
+                    if (pagedArticles.loadState.append is LoadState.Loading) {
+                        item {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                CircularProgressIndicator(modifier = Modifier.size(24.dp))
+                            }
+                        }
+                    }
+
+                    // append error + retry
+                    if (pagedArticles.loadState.append is LoadState.Error) {
+                        item {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Text(
+                                    text = "Failed to load more",
+                                    color = MaterialTheme.colorScheme.error
+                                )
+                                Spacer(modifier = Modifier.height(8.dp))
+                                Button(onClick = { pagedArticles.retry() }) {
+                                    Text("Retry")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
-
-
 @Composable
 fun ArticleItem(
     article: Article,
