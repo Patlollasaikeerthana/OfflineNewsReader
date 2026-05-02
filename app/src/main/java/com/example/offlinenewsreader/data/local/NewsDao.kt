@@ -1,5 +1,6 @@
 package com.example.offlinenewsreader.data.local
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -8,6 +9,8 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NewsDao {
+    @Query("SELECT * FROM news")
+    fun getNewsPaged():PagingSource<Int,ArticleEntity>
 
     @Query("SELECT * FROM news")
     fun getNews(): Flow<List<ArticleEntity>>
@@ -17,6 +20,9 @@ interface NewsDao {
 
     @Query("UPDATE news SET isBookmarked = :value WHERE url = :url")
     suspend fun updateBookMark(url: String, value: Boolean)
+
+    @Query("DELETE FROM news")
+    suspend fun clearAll()
 
     @Query(
         """
