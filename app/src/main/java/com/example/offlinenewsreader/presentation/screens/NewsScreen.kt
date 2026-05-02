@@ -94,6 +94,22 @@ fun NewsScreen(
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(start = 16.dp, top = 40.dp, bottom = 8.dp)
         )
+        //Offline Banner
+        AnimatedVisibility(visible = !state.isOnline) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color(0xFFB00020))
+                    .padding(vertical = 6.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "You're offline,showing cached news",
+                    color = Color.White,
+                    style = MaterialTheme.typography.labelMedium
+                )
+            }
+        }
 
         // Search Bar
         OutlinedTextField(
